@@ -1,7 +1,7 @@
 'use client';
 import SectionTitle from '@/components/SectionTitle';
 import { PROJECTS } from '@/lib/data';
-import { cn } from '@/lib/utils';
+import { cn, getAssetPath } from '@/lib/utils';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
@@ -116,7 +116,7 @@ const ProjectList = () => {
                         >
                             {PROJECTS.map((project) => (
                                 <Image
-                                    src={project.thumbnail}
+                                    src={getAssetPath(project.thumbnail)}
                                     alt="Project"
                                     width="400"
                                     height="500"

@@ -1,5 +1,5 @@
 import TransitionLink from '@/components/TransitionLink';
-import { cn } from '@/lib/utils';
+import { cn, getAssetPath } from '@/lib/utils';
 import { IProject } from '@/types';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -109,7 +109,7 @@ const Project = ({ index, project, selectedProject, onMouseEnter }: Props) => {
         >
             {selectedProject === null && (
                 <Image
-                    src={project.thumbnail}
+                    src={getAssetPath(project.thumbnail)}
                     alt="Project"
                     width="300"
                     height="200"

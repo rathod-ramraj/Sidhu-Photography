@@ -1,6 +1,7 @@
 'use client';
 import SectionTitle from '@/components/SectionTitle';
 import { MY_STACK } from '@/lib/data';
+import { getAssetPath } from '@/lib/utils';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
@@ -79,7 +80,7 @@ const Skills = () => {
                                     >
                                         <div>
                                             <Image
-                                                src={item.icon}
+                                                src={getAssetPath(item.icon)}
                                                 alt={item.name}
                                                 width="40"
                                                 height="40"

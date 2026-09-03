@@ -2,6 +2,7 @@
 import parse from 'html-react-parser';
 import ArrowAnimation from '@/components/ArrowAnimation';
 import TransitionLink from '@/components/TransitionLink';
+import { getAssetPath } from '@/lib/utils';
 import { IProject } from '@/types';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -179,26 +180,30 @@ const ProjectDetails = ({ project }: Props) => {
                     className="fade-in-later relative flex flex-col gap-2 max-w-[800px] mx-auto"
                     id="images"
                 >
-                    {project.images.map((image) => (
-                        <div
-                            key={image}
-                            className="group relative w-full aspect-[750/400] bg-background-light"
-                            style={{
-                                backgroundImage: `url(${image})`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center 50%',
-                                backgroundRepeat: 'no-repeat',
-                            }}
-                        >
-                            <a
-                                href={image}
-                                target="_blank"
-                                className="absolute top-4 right-4 bg-background/70 text-foreground size-12 inline-flex justify-center items-center transition-all opacity-0 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100"
+                    {project.images.map((image) => {
+                        const assetUrl = getAssetPath(image);
+                        return (
+                            <div
+                                key={image}
+                                className="group relative w-full aspect-[750/400] bg-background-light"
+                                style={{
+                                    backgroundImage: `url(${assetUrl})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center 50%',
+                                    backgroundRepeat: 'no-repeat',
+                                }}
                             >
-                                <ExternalLink />
-                            </a>
-                        </div>
-                    ))}
+                                <a
+                                    href={assetUrl}
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                    className="absolute top-4 right-4 bg-background/70 text-foreground size-12 inline-flex justify-center items-center transition-all opacity-0 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100"
+                                >
+                                    <ExternalLink />
+                                </a>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
