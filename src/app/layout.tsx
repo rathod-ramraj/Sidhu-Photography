@@ -13,6 +13,8 @@ import Preloader from '@/components/Preloader';
 import StickyEmail from './_components/StickyEmail';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
+import { DEVELOPMENT_STOPPED } from '@/constants/config';
+import DevelopmentStopped from '@/components/DevelopmentStopped';
 
 const antonFont = Anton({
     weight: '400',
@@ -29,8 +31,12 @@ const robotoFlex = Roboto_Flex({
 });
 
 export const metadata: Metadata = {
-    title: 'Sidhu Photography - Professional Wedding, Portrait & Event Photographer',
-    description: 'Portfolio of Sidhu Photography. Capturing timeless wedding stories, candid moments, editorial portraits, and cultural celebrations.',
+    title: DEVELOPMENT_STOPPED
+        ? 'Development Stopped - Sidhu Photography'
+        : 'Sidhu Photography - Professional Wedding, Portrait & Event Photographer',
+    description: DEVELOPMENT_STOPPED
+        ? 'Development of this project has been discontinued and the website is no longer actively maintained.'
+        : 'Portfolio of Sidhu Photography. Capturing timeless wedding stories, candid moments, editorial portraits, and cultural celebrations.',
 };
 
 export default function RootLayout({
@@ -54,32 +60,39 @@ export default function RootLayout({
             <body
                 className={`${antonFont.variable} ${robotoFlex.variable} antialiased`}
             >
-                <ReactLenis
-                    root
-                    options={{
-                        lerp: 0.1,
-                        duration: 1.4,
-                    }}
-                >
-                    {/* <a
-                        href="https://forms.gle/t73XYJgWD5cJNr6e8"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 block bg-black text-center z-[1] text-sm py-2 hover:text-primary transition-all"
+                {DEVELOPMENT_STOPPED ? (
+                    <>
+                        <DevelopmentStopped />
+                        <CustomCursor />
+                    </>
+                ) : (
+                    <ReactLenis
+                        root
+                        options={{
+                            lerp: 0.1,
+                            duration: 1.4,
+                        }}
                     >
-                        Frontend dev? I&apos;ll help you polish your resume —
-                        completely free.
-                    </a> */}
-                    <Navbar />
-                    <main>{children}</main>
-                    <Footer />
+                        {/* <a
+                            href="https://forms.gle/t73XYJgWD5cJNr6e8"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 block bg-black text-center z-[1] text-sm py-2 hover:text-primary transition-all"
+                        >
+                            Frontend dev? I&apos;ll help you polish your resume —
+                            completely free.
+                        </a> */}
+                        <Navbar />
+                        <main>{children}</main>
+                        <Footer />
 
-                    <CustomCursor />
-                    <Preloader />
-                    <ScrollProgressIndicator />
-                    <ParticleBackground />
-                    <StickyEmail />
-                </ReactLenis>
+                        <CustomCursor />
+                        <Preloader />
+                        <ScrollProgressIndicator />
+                        <ParticleBackground />
+                        <StickyEmail />
+                    </ReactLenis>
+                )}
             </body>
         </html>
     );
